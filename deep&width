@@ -1,0 +1,72 @@
+function TreeNode(){
+    let myTree = function(node){
+        this.data=node;
+        this.left=null;
+        this.right=null;
+    }
+
+    this.createTree=function(){
+        let bigTree=new myTree(5);
+        bigTree.left=new myTree(9);
+        bigTree.right=new myTree(20);
+        bigTree.left.right=new myTree(12);
+        bigTree.right.left=new myTree(15);
+        bigTree.right.right=new myTree(7);
+        return bigTree;
+    }
+}
+
+//广度优先非递归:
+function WidthTree(headnode){
+    let arr=[];
+    arr.push(headnode);
+    while(arr.length!=0){
+        let node = arr.shift();
+        console.log(node.data);
+        if(node.left){
+            arr.push(node.left);
+        }
+        if(node.right){
+            arr.push(node.right);
+        }
+    }
+}
+
+
+//深度优先非递归
+function DeepTree(headnode){
+    let stack=[];
+    stack.push(headnode);
+    while(stack.length!=0){
+        let node = stack.pop();
+        console.log(node.data);
+        if(node.right){
+            stack.push(node.right);
+        }
+        if(node.left){
+            stack.push(node.left);
+        }
+    }
+}
+
+//深度优先递归
+function deepTree(headnode){
+    if(headnode==null){return;}
+    console.log(headnode.data);
+    if(headnode.left!=null){
+        deepTree(headnode.left)
+    }
+    if(headnode.right!=null){
+        deepTree(headnode.right);
+    }
+}
+
+let Tree = new TreeNode();
+console.log('广度优先便利');
+WidthTree(Tree.createTree());
+console.log('...................');
+console.log('深度优先遍历');
+DeepTree(Tree.createTree());
+console.log('...................');
+console.log('深度优先遍历递归');
+deepTree(Tree.createTree());
